@@ -1,163 +1,106 @@
--- COMPANY
-INSERT INTO company (
-    company_name, location, company_email, address, date_created, date_modified
-) VALUES (
-    'Sky World Ltd', 'Nairobi', 'info@skyworld.co.ke', 'Kilimani Road, Nairobi', '2025-01-01', '2025-01-01'
-);
+-- Insert seed company
+INSERT INTO company (company_name, location, company_email, address, date_created, date_modified)
+VALUES ('SkyTech Solutions', 'Nairobi', 'info@skytech.co.ke', '123 Innovation Drive, Nairobi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- DEPARTMENTS
-INSERT INTO departments (
-    department_name, department_description, company_id, date_created, date_modified
-) VALUES
-    ('Engineering', 'Handles system architecture and development tasks', 1, '2025-01-01', '2025-01-01'),
-    ('HR', 'Manages human resources', 1, '2025-01-01', '2025-01-01');
+-- Insert employee statuses
+INSERT INTO employee_statuses (status_code, status_label, status_description, date_created, date_modified)
+VALUES 
+('new', 'New', 'Employed within the current month', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('active', 'Active', 'Currently employed and active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('leaving', 'Leaving', 'Leaving the company this month', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('terminated', 'Terminated', 'No longer working at the company', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- ROLES
-INSERT INTO roles (
-    role_name, role_description, department_id, date_created, date_modified
-) VALUES
-    ('Software Engineer', 'Backend systems and APIs', 1, '2025-01-01', '2025-01-01'),
-    ('DevOps Engineer', 'CI/CD and infrastructure automation', 1, '2025-01-01', '2025-01-01'),
-    ('HR Manager', 'Handles employee onboarding', 2, '2025-01-01', '2025-01-01');
+-- Insert departments
+INSERT INTO departments (department_name, department_description, company_id, date_created, date_modified)
+VALUES 
+('Engineering', 'Handles all tech development', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('HR', 'Manages recruitment and employee welfare', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- PERMISSIONS
-INSERT INTO permissions (
-    permission_name, permission_value, date_created, date_modified
-) VALUES
-    ('View Payroll', TRUE, '2025-01-01', '2025-01-01'),
-    ('Edit Employee', TRUE, '2025-01-01', '2025-01-01');
+-- Insert roles
+INSERT INTO roles (role_name, role_description, department_id, date_created, date_modified)
+VALUES 
+('Software Engineer', 'Develops and maintains software', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('DevOps Engineer', 'Manages deployments and CI/CD', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('HR Officer', 'Handles recruitment', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- ROLE-PERMISSION MAPPING
-INSERT INTO role_permission (
-    permission_id, role_id, date_created, date_modified
-) VALUES
-    (1, 1, '2025-01-01', '2025-01-01'),  -- Software Engineer can View Payroll
-    (2, 3, '2025-01-01', '2025-01-01');  -- HR Manager can Edit Employee
+-- Insert permissions
+INSERT INTO permissions (permission_name, permission_value, date_created, date_modified)
+VALUES 
+('can_create_user', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('can_view_payroll', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- AUTHENTICATION
-INSERT INTO authentication (email, password) VALUES
-    ('alice@skyworld.co.ke', 'hashed_pass1'),
-    ('bob@skyworld.co.ke', 'hashed_pass2'),
-    ('clara@skyworld.co.ke', 'hashed_pass3'),
-    ('dave@skyworld.co.ke', 'hashed_pass4'),
-    ('eve@skyworld.co.ke', 'hashed_pass5');
+-- Assign permissions to roles
+INSERT INTO role_permission (role_id, permission_id, date_created, date_modified)
+VALUES 
+(1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- EMPLOYEES
+-- Insert authentication accounts
+INSERT INTO authentication (email, password)
+VALUES 
+('alice@skytech.co.ke', 'hashedpass1'),
+('bob@skytech.co.ke', 'hashedpass2'),
+('carol@skytech.co.ke', 'hashedpass3'),
+('dave@skytech.co.ke', 'hashedpass4'),
+('eve@skytech.co.ke', 'hashedpass5'),
+('frank@skytech.co.ke', 'hashedpass6'),
+('grace@skytech.co.ke', 'hashedpass7'),
+('heidi@skytech.co.ke', 'hashedpass8'),
+('ivan@skytech.co.ke', 'hashedpass9'),
+('judy@skytech.co.ke', 'hashedpass10');
+
+-- Insert employees
 INSERT INTO employees (
-    employee_staff_number, employee_firstname, employee_lastname, employee_surname,
+    employee_staff_number, status_code, employee_firstname, employee_lastname, employee_surname,
     employee_email, employee_phone_number, employee_date_of_birth, employee_home_location,
     role_id, employment_type, salary_type, employment_date, termination_date,
-    date_created, date_modified
-) VALUES
-    ('EMP001', 'Alice', 'Muthoni', 'Wanjiru', 'alice@skyworld.co.ke', 720001001, '1994-04-10', 'Nakuru',
-     1, 'Permanent', 'Monthly', '2025-03-01', '2025-12-31', '2025-03-01', '2025-03-01'),
+    date_created, date_modified)
+VALUES 
+('ST1001', 'new', 'Alice', 'Johnson', NULL, 'alice@skytech.co.ke', '0711000001', '1990-05-20', 'Kilimani', 1, 'full-time', 'fixed', CURRENT_DATE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1002', 'active', 'Bob', 'Smith', NULL, 'bob@skytech.co.ke', '0711000002', '1988-03-11', 'Westlands', 2, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '4 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1003', 'active', 'Carol', 'White', NULL, 'carol@skytech.co.ke', '0711000003', '1992-07-15', 'Roysambu', 3, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '5 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1004', 'active', 'Dave', 'Green', NULL, 'dave@skytech.co.ke', '0711000004', '1995-12-25', 'Embakasi', 1, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '7 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1005', 'active', 'Eve', 'Black', NULL, 'eve@skytech.co.ke', '0711000005', '1985-09-01', 'Langata', 2, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '8 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1006', 'leaving', 'Frank', 'Brown', NULL, 'frank@skytech.co.ke', '0711000006', '1991-01-01', 'South C', 3, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '10 months', CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1007', 'terminated', 'Grace', 'Wilson', NULL, 'grace@skytech.co.ke', '0711000007', '1983-10-10', 'Kasarani', 1, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '12 months', CURRENT_DATE - INTERVAL '1 month', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1008', 'active', 'Heidi', 'Thompson', NULL, 'heidi@skytech.co.ke', '0711000008', '1994-06-06', 'Kikuyu', 2, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '6 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1009', 'new', 'Ivan', 'Adams', NULL, 'ivan@skytech.co.ke', '0711000009', '1996-11-17', 'Donholm', 3, 'full-time', 'fixed', CURRENT_DATE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('ST1010', 'active', 'Judy', 'Clark', NULL, 'judy@skytech.co.ke', '0711000010', '1989-02-02', 'Uthiru', 1, 'full-time', 'fixed', CURRENT_DATE - INTERVAL '3 months', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-    ('EMP002', 'Bob', 'Otieno', 'Onyango', 'bob@skyworld.co.ke', 720002002, '1990-07-15', 'Kisumu',
-     1, 'Permanent', 'Monthly', '2025-02-15', '2025-12-31', '2025-02-15', '2025-02-15'),
+-- Insert payment periods (monthly)
+INSERT INTO payment_periods (period_label, start_date, end_date, date_created, date_modified)
+VALUES 
+('January 2025', '2025-01-01', '2025-01-31', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('February 2025', '2025-02-01', '2025-02-28', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('March 2025', '2025-03-01', '2025-03-31', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('April 2025', '2025-04-01', '2025-04-30', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-    ('EMP003', 'Clara', 'Nduta', 'Kariuki', 'clara@skyworld.co.ke', 720003003, '1992-12-20', 'Nyeri',
-     2, 'Permanent', 'Monthly', '2025-04-01', '2025-12-31', '2025-04-01', '2025-04-01'),
+-- Insert earnings types
+INSERT INTO earnings (earning_name, earning_description, date_created, date_modified)
+VALUES 
+('Basic Salary', 'Monthly base salary', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('Allowance', 'Monthly allowances including house, transport, mortgage', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-    ('EMP004', 'Dave', 'Mutua', 'Mwanzia', 'dave@skyworld.co.ke', 720004004, '1988-06-22', 'Machakos',
-     3, 'Permanent', 'Monthly', '2025-01-10', '2025-05-15', '2025-01-10', '2025-01-10'),
+-- Insert deductions types
+INSERT INTO deductions (deduction_name, deduction_description, date_created, date_modified)
+VALUES 
+('PAYE', 'Income tax deduction', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('NHIF', 'Health insurance deduction', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-    ('EMP005', 'Eve', 'Kamau', 'Wambui', 'eve@skyworld.co.ke', 720005005, '1995-11-05', 'Thika',
-     3, 'Contract', 'Monthly', '2025-05-01', '2025-12-31', '2025-05-01', '2025-05-01');
+-- Insert a few audit logs
+INSERT INTO audit_logs (action_performed, performed_by, affected_table, record_id, change_details)
+VALUES 
+('Created employee Alice Johnson', 1, 'employees', 1, 'Initial insert of new employee'),
+('Updated status of Frank to leaving', 2, 'employees', 6, 'Changed status_code from active to leaving');
 
--- EMPLOYEE STATUS TYPES
-INSERT INTO employee_status (
-    status_name, date_created, date_modified
-) VALUES
-    ('new', '2025-01-01', '2025-01-01'),
-    ('active', '2025-01-01', '2025-01-01'),
-    ('leaving', '2025-01-01', '2025-01-01'),
-    ('terminated', '2025-01-01', '2025-01-01');
+-- Insert a few leave applications
+INSERT INTO employee_leaves (employee_id, leave_type, start_date, end_date, status, date_created, date_modified)
+VALUES 
+(3, 'annual', '2025-04-10', '2025-04-20', 'approved', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 'sick', '2025-04-05', '2025-04-07', 'approved', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- EMPLOYEE STATUS HISTORY
-INSERT INTO status_history (
-    employee_id, status_id, status_start_date, status_end_date, date_created, date_modified
-) VALUES
-    (1, 1, '2025-03-01', '2025-05-01', '2025-03-01', '2025-03-01'),
-    (1, 2, '2025-05-02', NULL, '2025-05-01', '2025-05-01'),
-
-    (2, 1, '2025-02-15', '2025-05-01', '2025-02-15', '2025-02-15'),
-    (2, 2, '2025-05-02', NULL, '2025-05-01', '2025-05-01'),
-
-    (3, 1, '2025-04-01', '2025-05-01', '2025-04-01', '2025-04-01'),
-    (3, 2, '2025-05-02', NULL, '2025-05-01', '2025-05-01'),
-
-    (4, 2, '2025-01-10', '2025-05-15', '2025-01-10', '2025-01-10'),
-    (4, 3, '2025-05-15', '2025-05-31', '2025-05-15', '2025-05-15'),
-    (4, 4, '2025-06-01', NULL, '2025-05-31', '2025-05-31'),
-
-    (5, 1, '2025-05-01', NULL, '2025-05-01', '2025-05-01');
-
--- PAYMENT PERIODS
-INSERT INTO payment_periods (
-    period_label, start_date, end_date, date_created, date_modified
-) VALUES
-    ('March 2025', '2025-03-01', '2025-03-31', '2025-03-01', '2025-03-01'),
-    ('April 2025', '2025-04-01', '2025-04-30', '2025-04-01', '2025-04-01'),
-    ('May 2025', '2025-05-01', '2025-05-31', '2025-05-01', '2025-05-01');
-
--- EARNINGS TYPES
-INSERT INTO earnings (
-    earning_name, earning_description, date_created, date_modified
-) VALUES
-    ('Basic Salary', 'Base pay per employee', '2025-01-01', '2025-01-01'),
-    ('House Allowance', '3% of basic salary', '2025-01-01', '2025-01-01'),
-    ('Transport Allowance', '1.5% of basic salary', '2025-01-01', '2025-01-01'),
-    ('Mortgage Allowance', '2% of basic salary', '2025-01-01', '2025-01-01');
-
--- DEDUCTIONS
-INSERT INTO deductions (
-    deduction_name, deduction_description, date_created, date_modified
-) VALUES
-    ('PAYE', '14% tax on total earnings', '2025-01-01', '2025-01-01'),
-    ('NHIF', 'Health insurance contribution', '2025-01-01', '2025-01-01'),
-    ('NSSF', 'Social security pension fund', '2025-01-01', '2025-01-01'),
-    ('HELB', 'Loan repayment deduction', '2025-01-01', '2025-01-01'),
-    ('SACCO', 'Cooperative savings deduction', '2025-01-01', '2025-01-01');
-
--- EARNINGS MAP (mapping employees to earnings per payment period)
-INSERT INTO earnings_map (
-    employee_id, payment_period_id, earnings_id, earning_amount, date_created, date_modified
-) VALUES
-    -- Alice (employee_id=2)
-    (2, 1, 1, 100000.00, '2025-03-31', '2025-03-31'),  -- Basic Salary
-    (2, 1, 2, 3000.00, '2025-03-31', '2025-03-31'),    -- House Allowance (3%)
-    (2, 1, 3, 1500.00, '2025-03-31', '2025-03-31'),    -- Transport Allowance (1.5%)
-    (2, 1, 4, 2000.00, '2025-03-31', '2025-03-31'),    -- Mortgage Allowance (2%)
-
-    (2, 2, 1, 102000.00, '2025-04-30', '2025-04-30'),  -- Basic Salary + 2%
-    (2, 2, 2, 3060.00, '2025-04-30', '2025-04-30'),
-    (2, 2, 3, 1530.00, '2025-04-30', '2025-04-30'),
-    (2, 2, 4, 2040.00, '2025-04-30', '2025-04-30'),
-
-    (2, 3, 1, 104000.00, '2025-05-31', '2025-05-31'),  -- Basic Salary + 4%
-    (2, 3, 2, 3120.00, '2025-05-31', '2025-05-31'),
-    (2, 3, 3, 1560.00, '2025-05-31', '2025-05-31'),
-    (2, 3, 4, 2080.00, '2025-05-31', '2025-05-31');
-
--- DEDUCTIONS MAP (mapping deductions per employee per period)
-INSERT INTO deductions_map (
-    employee_id, payment_period_id, deduction_id, deduction_amount, date_created, date_modified
-) VALUES
-    (2, 1, 1, 17000.00, '2025-03-31', '2025-03-31'), -- PAYE March
-    (2, 1, 2, 1500.00, '2025-03-31', '2025-03-31'),  -- NHIF March
-    (2, 1, 3, 2000.00, '2025-03-31', '2025-03-31'),  -- NSSF March
-    (2, 1, 4, 1000.00, '2025-03-31', '2025-03-31'),  -- HELB March
-    (2, 1, 5, 1200.00, '2025-03-31', '2025-03-31'),  -- SACCO March
-
-    (2, 2, 1, 17300.00, '2025-04-30', '2025-04-30'), -- PAYE April
-    (2, 2, 2, 1530.00, '2025-04-30', '2025-04-30'),
-    (2, 2, 3, 2040.00, '2025-04-30', '2025-04-30'),
-    (2, 2, 4, 1020.00, '2025-04-30', '2025-04-30'),
-    (2, 2, 5, 1240.00, '2025-04-30', '2025-04-30'),
-
-    (2, 3, 1, 17600.00, '2025-05-31', '2025-05-31'), -- PAYE May
-    (2, 3, 2, 1560.00, '2025-05-31', '2025-05-31'),
-    (2, 3, 3, 2080.00, '2025-05-31', '2025-05-31'),
-    (2, 3, 4, 1040.00, '2025-05-31', '2025-05-31'),
-    (2, 3, 5, 1280.00, '2025-05-31', '2025-05-31');
-
+-- Insert contracts
+INSERT INTO employment_contracts (employee_id, contract_type, start_date, end_date, basic_salary, benefits, date_created, date_modified)
+VALUES 
+(1, 'permanent', '2025-05-01', NULL, 100000.00, '{"health": "provided", "bonus": "eligible"}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'permanent', '2025-01-01', NULL, 110000.00, '{"health": "provided"}', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
