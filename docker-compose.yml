@@ -6,11 +6,11 @@ networks:
 services:
   postgres:
     image: postgres
-    container_name: pgdb
+    container_name: pgDB
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: psqlDB
+      POSTGRES_DB: psqldb
     ports:
       - "5432:5432"
     networks:
@@ -20,10 +20,10 @@ services:
 
   mysql:
     image: mysql
-    container_name: mysqldb
+    container_name: mysqlDB
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysqlDB
+      MYSQL_DATABASE: mysqldb
     ports:
       - "3306:3306"
     networks:
@@ -49,3 +49,16 @@ volumes:
   pgdata:
   mysqldata:
   mssql-data:
+
+
+
+# docker compose down -v
+# docker compose up -d
+
+
+# docker exec -it pgDB psql -U admin -d psqldb
+
+
+# docker exec -it mysqlDB mysql -u root -p
+
+# docker exec -it mssqlDB /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourPassword123
