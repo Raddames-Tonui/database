@@ -1,0 +1,51 @@
+version: '3.8'
+
+networks:
+  dbnet:
+
+services:
+  postgres:
+    image: postgres
+    container_name: pgdb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: pssqlDB
+    ports:
+      - "5432:5432"
+    networks:
+      - dbnet
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysqlDB
+    ports:
+      - "3306:3306"
+    networks:
+      - dbnet
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    container_name: mssqlDB
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourPassword123"
+      MSSQL_PID: "Express"
+    ports:
+      - "11433:1433"
+    networks:
+      - dbnet
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+volumes:
+  pgdata:
+  mysqldata:
+  mssql-data:
