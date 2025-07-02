@@ -6,7 +6,7 @@ networks:
 services:
   postgres:
     image: postgres
-    container_name: pgDB
+    container_name: pgdb
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -20,7 +20,7 @@ services:
 
   mysql:
     image: mysql
-    container_name: mysqlDB
+    container_name: mysqldb
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mysqldb
@@ -33,7 +33,7 @@ services:
 
   mssql:
     image: mcr.microsoft.com/mssql/server
-    container_name: mssqlDB
+    container_name: mssqldb
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "YourPassword123"
@@ -56,9 +56,9 @@ volumes:
 # docker compose up -d
 
 
-# docker exec -it pgDB psql -U admin -d psqldb
+# docker exec -it pgdb psql -U admin -d psqldb
 
 
-# docker exec -it mysqlDB mysql -u root -p
+# docker exec -it mysqldb mysql -u root -p
 
-# docker exec -it mssqlDB /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourPassword123
+# docker exec -it mssqldb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourPassword123
