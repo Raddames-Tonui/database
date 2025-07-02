@@ -8,9 +8,9 @@ services:
     image: postgres
     container_name: pgdb
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: psqldb
+      POSTGRES_USER: admin                # Default user
+      POSTGRES_PASSWORD: admin            # Default password
+      # No POSTGRES_DB, will use default: postgres
     ports:
       - "5432:5432"
     networks:
@@ -18,12 +18,15 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+    # 🔑 Connect via:
+    # docker exec -it pgdb psql -U admin -d postgres
+
   mysql:
     image: mysql
     container_name: mysqldb
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mysqldb
+      MYSQL_ROOT_PASSWORD: root           # Default root user
+      # No MYSQL_DATABASE, starts with internal system DBs only
     ports:
       - "3306:3306"
     networks:
@@ -31,12 +34,15 @@ services:
     volumes:
       - mysqldata:/var/lib/mysql
 
+    # 🔑 Connect via:
+    # docker exec -it mysqldb mysql -u root -p
+
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssqldb
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "YourPassword123"
+      SA_PASSWORD: "Password123"      # Default sa user
       MSSQL_PID: "Express"
     ports:
       - "11433:1433"
@@ -45,20 +51,14 @@ services:
     volumes:
       - mssql-data:/var/opt/mssql
 
+    # 🔑 Connect via:
+    # docker exec -it mssqldb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123
+
 volumes:
   pgdata:
   mysqldata:
   mssql-data:
 
 
-
 # docker compose down -v
 # docker compose up -d
-
-
-# docker exec -it pgdb psql -U admin -d psqldb
-
-
-# docker exec -it mysqldb mysql -u root -p
-
-# docker exec -it mssqldb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourPassword123
