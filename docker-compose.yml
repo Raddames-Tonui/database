@@ -6,7 +6,7 @@ networks:
 services:
   postgres:
     image: postgres
-    container_name: pgdb
+    container_name: postgresdb
     environment:
       POSTGRES_USER: admin                # Default user
       POSTGRES_PASSWORD: admin            # Default password
@@ -19,7 +19,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
     # 🔑 Connect via:
-    # docker exec -it pgdb psql -U admin -d postgres
+    # docker exec -it postgresdb psql -U admin -d postgres
 
   mysql:
     image: mysql

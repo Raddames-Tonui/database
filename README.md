@@ -14,22 +14,22 @@ This repository demonstrates practical implementations of three common SQL datab
 
 Builds a full-featured online examination portal with question banks, exams, and student tracking.
 
-🔗 [View Project README](/online_exam/README.md)  
+🔗 [View Project README](./online_exam/README.md)  
 📊 [ERD Diagram](https://drawsql.app/teams/raddames/diagrams/task-one-online-exam)
 
 ### 2. Employee Salaries Management
 
 A project to manage employees, departments, roles, and salary structures using various SQL features.
 
-🔗 [View Project README](/employee_salaries/README.md)  
+🔗 [View Project README](./employee_salaries/README.md)  
 📊 [ERD Diagram](https://drawsql.app/teams/raddames/diagrams/task-two-employee-salaries)
 
 ### 3. Library Management System
 
 A complete system for managing books, authors, borrowers, and issue/return workflows.
 
-🔗 [View Project README Task 1](/library_management/README.md)  
-🔗 [View Project README Task 2](/library_management/README.MD)  
+🔗 [View Project README Task 1](./library_management/README.md)  
+🔗 [View Project README Task 2](./library_management/README.MD)  
 
 📊 [ERD Diagram](https://drawsql.app/teams/raddames/diagrams/task-two-library-management-part-2-mysql)
 

@@ -1,3 +1,5 @@
+
+
 -- SUBJECTS TABLE
 CREATE TABLE subjects (
     subject_id     BIGSERIAL PRIMARY KEY,
@@ -23,18 +25,18 @@ CREATE TABLE class_subjects (
     CONSTRAINT unique_class_subject UNIQUE (class_id, subject_id)  -- Prevents duplicates
 );
 
--- PUPILS TABLE
-CREATE TABLE pupils (
-    pupil_id        BIGSERIAL PRIMARY KEY,
-    pupil_firstname VARCHAR(50)  NOT NULL,
-    pupil_lastname  VARCHAR(50)  NOT NULL,
-    pupil_email     VARCHAR(100) NOT NULL UNIQUE,
-    gender          VARCHAR(10)  NOT NULL CHECK (gender IN ('Male', 'Female')),
-    class_id        BIGINT       NOT NULL REFERENCES classes(class_id) ON DELETE RESTRICT,
-    date_created    TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    date_modified   TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    CONSTRAINT fk_pupil_class FOREIGN KEY (class_id) REFERENCES classes(class_id)
-);
+    -- PUPILS TABLE
+    CREATE TABLE pupils (
+        pupil_id        BIGSERIAL PRIMARY KEY,
+        pupil_firstname VARCHAR(50)  NOT NULL,
+        pupil_lastname  VARCHAR(50)  NOT NULL,
+        pupil_email     VARCHAR(100) NOT NULL UNIQUE,
+        gender          VARCHAR(10)  NOT NULL CHECK (gender IN ('Male', 'Female')),
+        class_id        BIGINT       NOT NULL REFERENCES classes(class_id) ON DELETE RESTRICT,
+        date_created    TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+        date_modified   TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
+        CONSTRAINT fk_pupil_class FOREIGN KEY (class_id) REFERENCES classes(class_id)
+    );
 
 COMMENT ON COLUMN pupils.class_id IS 'Foreign Key';
 
