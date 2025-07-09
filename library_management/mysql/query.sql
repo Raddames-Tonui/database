@@ -1,4 +1,5 @@
 
+USE library_management;
 
 # 2. Generate a report of books that fall under a specific category or sub-category.
 DELIMITER $$

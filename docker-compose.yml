@@ -1,4 +1,3 @@
-version: '3.8'
 
 networks:
   dbnet:
@@ -8,16 +7,14 @@ services:
     image: postgres
     container_name: postgresdb
     environment:
-      POSTGRES_USER: admin                # Default user
-      POSTGRES_PASSWORD: admin            # Default password
-      # No POSTGRES_DB, will use default: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
     networks:
       - dbnet
     volumes:
       - pgdata:/var/lib/postgresql/data
-
     # 🔑 Connect via:
     # docker exec -it postgresdb psql -U admin -d postgres
 
@@ -25,34 +22,30 @@ services:
     image: mysql
     container_name: mysqldb
     environment:
-      MYSQL_ROOT_PASSWORD: root           # Default root user
-      # No MYSQL_DATABASE, starts with internal system DBs only
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     networks:
       - dbnet
     volumes:
       - mysqldata:/var/lib/mysql
-
     # 🔑 Connect via:
     # docker exec -it mysqldb mysql -u root -p
 
   mssql:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/azure-sql-edge
     container_name: mssqldb
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Password123"      # Default sa user
-      MSSQL_PID: "Express"
+      ACCEPT_EULA: "1"
+      MSSQL_SA_PASSWORD: "Password123!"
     ports:
       - "11433:1433"
     networks:
       - dbnet
     volumes:
       - mssql-data:/var/opt/mssql
-
     # 🔑 Connect via:
-    # docker exec -it mssqldb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123
+    # docker exec -it mssqldb /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password123!
 
 volumes:
   pgdata:
@@ -62,3 +55,31 @@ volumes:
 
 # docker compose down -v
 # docker compose up -d
+
+#🔧 Correct Setup for azure-sql-edge in IntelliJ:
+#Go to Database tab
+#
+#Click + → Data Source → Microsoft SQL Server
+#
+#Use these values:
+#
+#Field	Value
+#Host	localhost
+#Port	11433
+#Database	master (or one you created)
+#User	sa
+#Password	Password123!
+#
+#Go to the Advanced tab, set:
+#
+#encrypt = false
+#
+#trustServerCertificate = true
+#
+#Go to Driver tab (if needed), make sure:
+#
+#Driver class = com.microsoft.sqlserver.jdbc.SQLServerDriver
+#
+#Not jTDS and not Azure SQL (cloud)
+#
+#Hit Test Connection – it should work now.

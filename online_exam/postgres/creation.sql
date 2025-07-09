@@ -1,5 +1,5 @@
 -- Create database
-CREATE DATABASE online_exams;
+-- CREATE DATABASE online_exams;
 
 
 -- SUBJECTS TABLE
