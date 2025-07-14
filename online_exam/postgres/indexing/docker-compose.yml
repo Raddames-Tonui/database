@@ -1,0 +1,28 @@
+services:
+  pg_indexed:
+    image: postgres
+    container_name: pg_indexed
+    environment:
+      POSTGRES_DB: indexed_exams
+      POSTGRES_USER: psqladm
+      POSTGRES_PASSWORD: !psql123
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_indexed_data:/var/lib/postgresql/data
+
+  pg_unindexed:
+    image: postgres
+    container_name: pg_unindexed
+    environment:
+      POSTGRES_DB: unindexed_exams
+      POSTGRES_USER: psqladm
+      POSTGRES_PASSWORD: !psql123
+    ports:
+      - "5434:5432"
+    volumes:
+      - pg_unindexed_data:/var/lib/postgresql/data
+
+volumes:
+  pg_indexed_data:
+  pg_unindexed_data:
