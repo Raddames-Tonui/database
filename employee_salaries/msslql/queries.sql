@@ -22,9 +22,8 @@ IF OBJECT_ID('get_employee_previous_payment_history', 'IF') IS NOT NULL
 DROP FUNCTION get_employee_previous_payment_history;
 GO
 
--- ==========================================
+
 -- 1. VIEW: Employee Status with Computed Status Code
--- ==========================================
 
 CREATE VIEW employee_status_view AS
 SELECT
@@ -65,9 +64,9 @@ FROM employees e
                                                 END;
 GO
 
--- ==========================================
+
 -- 2. VIEW: Payroll Report - Earnings, Deductions, Net Pay
--- ==========================================
+
 
 CREATE VIEW employee_payroll_report AS
 SELECT
@@ -92,9 +91,9 @@ GROUP BY
     pp.period_label;
 GO
 
--- ==========================================
+
 -- 3. VIEW: Allowances and Net Salary by Department
--- ==========================================
+
 
 CREATE VIEW employee_allowance_report AS
 SELECT
@@ -121,9 +120,9 @@ GROUP BY
     pp.period_label;
 GO
 
--- ==========================================
+
 -- 4. FUNCTION: Company Net Salary Report
--- ==========================================
+
 
 CREATE FUNCTION get_company_net_salary()
     RETURNS TABLE
@@ -154,9 +153,9 @@ WHERE e.employee_id IS NOT NULL
 GROUP BY c.company_id, c.company_name, pp.payment_period_id, pp.period_label;
 GO
 
--- ==========================================
+
 -- 5. FUNCTION: Employee Previous Monthly Payment History
--- ==========================================
+
 
 CREATE FUNCTION get_employee_previous_payment_history()
     RETURNS TABLE
@@ -190,12 +189,12 @@ GROUP BY
     ec.basic_salary;
 GO
 
--- ==========================================
--- ✅ USAGE EXAMPLES:
--- ==========================================
+
+-- USAGE EXAMPLES:
+
 
 -- 1. New Employees by Department
-SELECT * FROM employee_status_view WHERE status_code = 'new';
+SELECT * FROM employee_status_view WHERE status_code = 'terminated';
 
 -- 2. Active Employees in Engineering
 SELECT * FROM employee_status_view WHERE status_code = 'active' AND department_name = 'Engineering';

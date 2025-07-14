@@ -58,11 +58,9 @@ volumes:
 
 #🔧 Correct Setup for azure-sql-edge in IntelliJ:
 #Go to Database tab
-#
 #Click + → Data Source → Microsoft SQL Server
 #
 #Use these values:
-#
 #Field	Value
 #Host	localhost
 #Port	11433
@@ -71,15 +69,9 @@ volumes:
 #Password	Password123!
 #
 #Go to the Advanced tab, set:
-#
 #encrypt = false
-#
 #trustServerCertificate = true
-#
 #Go to Driver tab (if needed), make sure:
-#
 #Driver class = com.microsoft.sqlserver.jdbc.SQLServerDriver
-#
 #Not jTDS and not Azure SQL (cloud)
-#
 #Hit Test Connection – it should work now.

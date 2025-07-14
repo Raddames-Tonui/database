@@ -5,11 +5,13 @@ services:
     environment:
       POSTGRES_DB: indexed_exams
       POSTGRES_USER: psqladm
-      POSTGRES_PASSWORD: !psql123
+      POSTGRES_PASSWORD: "!psql123"
     ports:
       - "5433:5432"
     volumes:
       - pg_indexed_data:/var/lib/postgresql/data
+
+        # docker exec -it pg_indexed psql -U psqladm -d indexed_exams
 
   pg_unindexed:
     image: postgres
@@ -17,7 +19,7 @@ services:
     environment:
       POSTGRES_DB: unindexed_exams
       POSTGRES_USER: psqladm
-      POSTGRES_PASSWORD: !psql123
+      POSTGRES_PASSWORD: "!psql123"
     ports:
       - "5434:5432"
     volumes:
@@ -26,3 +28,6 @@ services:
 volumes:
   pg_indexed_data:
   pg_unindexed_data:
+
+  # docker exec -it pg_indexed psql -U psqladm -d unindexed_exams
+
